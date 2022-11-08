@@ -1,4 +1,4 @@
-# station-normalize
+# station-name-diff
 
 As correctly said in [this article](https://bflorat.medium.com/proper-strings-normalization-for-comparison-purpose-226773865322)
 
