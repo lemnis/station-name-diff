@@ -1,14 +1,14 @@
 /// <reference path="../module.d.ts" />
 
-import { Languages } from "./language.data.js";
+import { Languages } from "./language.data.mjs";
 import {
   diacritics,
   containsCyrillic,
   convertCyrillicToLatin,
   containsLatin,
-} from "./script.js";
+} from "./script.mjs";
 import wuzzy from "wuzzy";
-import { normalize } from "./normalize.js";
+import { normalize } from "./normalize.mjs";
 
 const Type = {
   STATION: "station",
@@ -152,3 +152,5 @@ export const compare = (a, b, { ignoreBrackets = false } = {}) => {
 
   return { score };
 };
+
+export { normalize };

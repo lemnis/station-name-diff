@@ -1,5 +1,5 @@
 import test from "ava";
-import { compare, parse } from "./index.js";
+import { compare, parse } from "../src/index.mjs";
 
 test(`Should not match "Helmond Brandevoort" with "Helmond Brouwhuis"`, (t) => {
   t.like(parse("Helmond Brandevoort", ["nl"]), { normalized: "Helmond Brandevoort" });

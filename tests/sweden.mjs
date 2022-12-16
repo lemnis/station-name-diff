@@ -1,11 +1,11 @@
 import test from "ava";
-import { compare, parse } from "./index.js";
+import { compare, parse } from "../src/index.mjs";
 
-test(`Should match "Mjoelby Station" with "Mjoelby"`, (t) => {
+test(`Should match "Mjoelby Station" with "Mjoelby"`, async (t) => {
   t.like(parse("Mjoelby Station", ["en"]), { normalized: "Mjoelby Station" });
   t.like(parse("Mjoelby", ["en"]), { normalized: "Mjoelby" });
   t.like(
-    compare(
+    await compare(
       { name: "Mjoelby Station", lang: "en" },
       { name: "Mjoelby", lang: "en" }
     ),
@@ -13,11 +13,11 @@ test(`Should match "Mjoelby Station" with "Mjoelby"`, (t) => {
   );
 });
 
-test(`Should match "Mjoelby Station" with "Mjölby"`, (t) => {
+test(`Should match "Mjoelby Station" with "Mjölby"`, async (t) => {
   t.like(parse("Mjoelby Station", ["en"]), { normalized: "Mjoelby Station" });
   t.like(parse("Mjölby", ["en"]), { normalized: "Mjölby" });
   t.like(
-    compare(
+    await compare(
       { name: "Mjoelby Station", lang: "en" },
       { name: "Mjölby", lang: "en" }
     ),
@@ -25,11 +25,11 @@ test(`Should match "Mjoelby Station" with "Mjölby"`, (t) => {
   );
 });
 
-test(`Should match "Norrköping Central" with "Norrkoepings central"`, (t) => {
+test(`Should match "Norrköping Central" with "Norrkoepings central"`, async (t) => {
   t.like(parse("Norrköping Central", ["en"]), { normalized: "Norrköping Central" });
   t.like(parse("Norrkoepings central", ["en"]), { normalized: "Norrkoepings central" });
   t.like(
-    compare(
+    await compare(
       { name: "Norrköping Central", lang: "en" },
       { name: "Norrkoepings central", lang: "en" }
     ),
@@ -37,11 +37,11 @@ test(`Should match "Norrköping Central" with "Norrkoepings central"`, (t) => {
   );
 });
 
-test(`Should match "Ånge" with "Aange"`, (t) => {
+test(`Should match "Ånge" with "Aange"`, async (t) => {
   t.like(parse("Ånge", ["en"]), { normalized: "Ånge" });
   t.like(parse("Aange", ["en"]), { normalized: "Aange" });
   t.like(
-    compare(
+    await compare(
       { name: "Ånge", lang: "en" },
       { name: "Aange", lang: "en" }
     ),

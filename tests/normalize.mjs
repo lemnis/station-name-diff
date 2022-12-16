@@ -1,5 +1,5 @@
 import test from "ava";
-import { normalize } from "./normalize.js";
+import { normalize } from "../src/normalize.mjs";
 
 test("Should tremove spaces at end and start", (t) =>
   t.is(normalize("  foo  "), "foo"));

@@ -51,7 +51,7 @@ export const Languages = {
     halt: ["Apeadero de "],
   },
   en: {
-    station: ["railway station", "train station", " station", "Station"],
+    station: ["railway station", "train station", " station", "Station", "Railway Station"],
     centralStation: ["Central", " central"],
     halt: ["railway stop", "halt"],
     abbreviations: [

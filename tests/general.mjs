@@ -1,8 +1,8 @@
 import test from "ava";
-import { compare, parse } from "./index.js";
+import { compare, parse } from "../src/index.mjs";
 
 // Estonia
-test(`Should not match "Tallinn" with "Rakenduspunkt Balti"`, (t) => {
+test(`Should not match "Tallinn" with "Rakenduspunkt Balti"`, async (t) => {
   t.like(parse("Tallinn", ["nl"]), { normalized: "Tallinn" });
   t.like(parse("Rakenduspunkt Balti", ["nl"]), {
     normalized: "Rakenduspunkt Balti",
@@ -19,7 +19,7 @@ test(`Should not match "Tallinn" with "Rakenduspunkt Balti"`, (t) => {
 });
 
 // Austria
-test.skip(`Should match "Hopfgarten im Brixental" with "Hopfgarten/Brixent."`, (t) => {
+test.skip(`Should match "Hopfgarten im Brixental" with "Hopfgarten/Brixent."`, async (t) => {
   t.like(parse("Hopfgarten im Brixental", ["nl"]), {
     normalized: "Hopfgarten im Brixental",
   });
@@ -38,7 +38,7 @@ test.skip(`Should match "Hopfgarten im Brixental" with "Hopfgarten/Brixent."`, (
 });
 
 // Germany
-test(`Should match "MARIENBERG(SACHS) (Germany)" with "Marienberg (Sachs)"`, (t) => {
+test(`Should match "MARIENBERG(SACHS) (Germany)" with "Marienberg (Sachs)"`, async (t) => {
   t.like(parse("MARIENBERG(SACHS) (Germany)", ["nl"]), {
     normalized: "Marienberg (Sachs)",
   });
@@ -55,7 +55,7 @@ test(`Should match "MARIENBERG(SACHS) (Germany)" with "Marienberg (Sachs)"`, (t)
 });
 
 // Luxembourg
-test('"Clervaux, Gare" should equal "Clervaux"', (t) => {
+test('"Clervaux, Gare" should equal "Clervaux"', async (t) => {
   t.like(parse("Clervaux, Gare", ["lu"]), {
     normalized: "Clervaux, Gare",
     simplified: "Clervaux",
@@ -79,7 +79,7 @@ test('"Clervaux, Gare" should equal "Clervaux"', (t) => {
   );
 });
 
-test('"Luxembourg, Gare Centrale" should equal "Luxembourg"', (t) => {
+test('"Luxembourg, Gare Centrale" should equal "Luxembourg"', async (t) => {
   t.like(parse("Luxembourg, Gare Centrale", ["lu"]), {
     normalized: "Luxembourg, Gare Centrale",
     simplified: "Luxembourg",
@@ -100,7 +100,7 @@ test('"Luxembourg, Gare Centrale" should equal "Luxembourg"', (t) => {
     { score: 1 }
   );
 });
-test('(may change) "Luxembourg, Gare Centrale" should equal "Luxembourg, Gare"', (t) => {
+test('(may change) "Luxembourg, Gare Centrale" should equal "Luxembourg, Gare"', async (t) => {
   t.like(parse("Luxembourg, Gare Centrale", ["lu"]), {
     normalized: "Luxembourg, Gare Centrale",
     simplified: "Luxembourg",
@@ -121,7 +121,7 @@ test('(may change) "Luxembourg, Gare Centrale" should equal "Luxembourg, Gare"',
     { score: 1 }
   );
 });
-test('"Dudelange, Gare-Burange" should equal "Dudelange-Burange"', (t) => {
+test('"Dudelange, Gare-Burange" should equal "Dudelange-Burange"', async (t) => {
   t.like(parse("Dudelange, Gare-Burange", ["lu"]), {
     normalized: "Dudelange, Gare-Burange",
     simplified: "Dudelange-Burange",
@@ -142,7 +142,7 @@ test('"Dudelange, Gare-Burange" should equal "Dudelange-Burange"', (t) => {
     { score: 1 }
   );
 });
-test('"Dudelange (Centre), Gare" should not equal "Dudelange (Usines), Gare"', (t) => {
+test('"Dudelange (Centre), Gare" should not equal "Dudelange (Usines), Gare"', async (t) => {
   t.like(parse("Dudelange (Centre), Gare", ["lu"]), {
     normalized: "Dudelange (Centre), Gare",
     simplified: "Dudelange (Centre)",
@@ -164,7 +164,7 @@ test('"Dudelange (Centre), Gare" should not equal "Dudelange (Usines), Gare"', (
   );
 });
 
-test('"Dudelange (Centre), Gare" should equal "Dudelange-Centre"', (t) => {
+test('"Dudelange (Centre), Gare" should equal "Dudelange-Centre"', async (t) => {
   t.like(parse("Dudelange (Centre), Gare", ["lu"]), {
     normalized: "Dudelange (Centre), Gare",
     simplified: "Dudelange (Centre)",
@@ -190,7 +190,7 @@ test('"Dudelange (Centre), Gare" should equal "Dudelange-Centre"', (t) => {
 test.todo('Should match catalan & spanish name "Agurain/salvatierra de alava"');
 
 // Germany
-test('Should not match "Hofheim (Ried)" with "Hofheim (Taunus)"', (t) => {
+test('Should not match "Hofheim (Ried)" with "Hofheim (Taunus)"', async (t) => {
   t.like(parse("Hofheim (Ried)", ["de"]), { normalized: "Hofheim (Ried)" });
   t.like(parse("Hofheim (Taunus)", ["de"]), { normalized: "Hofheim (Taunus)" });
   t.like(
@@ -204,7 +204,7 @@ test('Should not match "Hofheim (Ried)" with "Hofheim (Taunus)"', (t) => {
   );
 });
 
-test('Should not match "Bad Kösen" with "Bad Köstritz"', (t) => {
+test('Should not match "Bad Kösen" with "Bad Köstritz"', async (t) => {
   t.like(parse("Bad Kösen", ["de"]), { normalized: "Bad Kösen" });
   t.like(parse("Bad Köstritz", ["de"]), { normalized: "Bad Köstritz" });
   t.like(
@@ -219,7 +219,7 @@ test('Should not match "Bad Kösen" with "Bad Köstritz"', (t) => {
 });
 
 // In reality these are different stations located in Germany
-test('Should not fully match "Königsborn" with "Königsbornn"', (t) => {
+test('Should not fully match "Königsborn" with "Königsbornn"', async (t) => {
   t.like(parse("Königsborn", ["de"]), { normalized: "Königsborn" });
   t.like(parse("Königsbornn", ["de"]), { normalized: "Königsbornn" });
   t.like(
@@ -233,7 +233,7 @@ test('Should not fully match "Königsborn" with "Königsbornn"', (t) => {
   );
 });
 
-test('Should match "Crossen a. d. Elster" with "Crossen an der Elster"', (t) => {
+test('Should match "Crossen a. d. Elster" with "Crossen an der Elster"', async (t) => {
   t.like(parse("Crossen a. d. Elster", ["de"]), {
     normalized: "Crossen a. d. Elster",
   });
@@ -251,7 +251,7 @@ test('Should match "Crossen a. d. Elster" with "Crossen an der Elster"', (t) => 
   );
 });
 
-test('Should match "Crossen a. d. Elster" with "Crossen a d Elster"', (t) => {
+test('Should match "Crossen a. d. Elster" with "Crossen a d Elster"', async (t) => {
   t.like(parse("Crossen a. d. Elster", ["de"]), {
     normalized: "Crossen a. d. Elster",
   });
@@ -269,7 +269,7 @@ test('Should match "Crossen a. d. Elster" with "Crossen a d Elster"', (t) => {
   );
 });
 
-test('Should have a low match with "Lobenstein (Thür)" with "Bad Lobenstein" when brackets are ignored', (t) => {
+test('Should have a low match with "Lobenstein (Thür)" with "Bad Lobenstein" when brackets are ignored', async (t) => {
   t.like(parse("Lobenstein (Thür)", ["de"]), {
     normalized: "Lobenstein (Thür)",
   });
@@ -287,7 +287,7 @@ test('Should have a low match with "Lobenstein (Thür)" with "Bad Lobenstein" wh
     }
   );
 });
-test('Should match "Limbach (b Homburg,Saar)" equal to "Limbach (b Homburg/Saar)"', (t) => {
+test('Should match "Limbach (b Homburg,Saar)" equal to "Limbach (b Homburg/Saar)"', async (t) => {
   t.like(parse("Limbach (b Homburg,Saar)", ["de"]), {
     normalized: "Limbach (b Homburg,Saar)",
   });
@@ -304,12 +304,12 @@ test('Should match "Limbach (b Homburg,Saar)" equal to "Limbach (b Homburg/Saar)
     }
   );
 });
-test('Should normalize "Hofheim(Taunus)" to "Hofheim (Taunus)"', (t) => {
+test('Should normalize "Hofheim(Taunus)" to "Hofheim (Taunus)"', async (t) => {
   t.like(parse("Hofheim(Taunus)", ["nl"]), { normalized: "Hofheim (Taunus)" });
 });
 
 // Diacritics
-test('"St. Pölten" should equal "St. Poelten"', (t) => {
+test('"St. Pölten" should equal "St. Poelten"', async (t) => {
   t.like(parse("St. Pölten", ["de"]), {
     normalized: "St. Pölten",
     simplified: "St. Poelten",
@@ -333,7 +333,7 @@ test('"St. Pölten" should equal "St. Poelten"', (t) => {
   );
 });
 
-test('"Wörgl" should equal "Woergl"', (t) => {
+test('"Wörgl" should equal "Woergl"', async (t) => {
   t.like(parse("Wörgl", ["de"]), {
     normalized: "Wörgl",
     simplified: "Woergl",
@@ -352,7 +352,7 @@ test('"Wörgl" should equal "Woergl"', (t) => {
   );
 });
 
-test('"Wörgl" should equal "Worgl"', (t) => {
+test('"Wörgl" should equal "Worgl"', async (t) => {
   t.like(parse("Wörgl", ["de"]), {
     normalized: "Wörgl",
     simplified: "Woergl",
@@ -372,7 +372,7 @@ test('"Wörgl" should equal "Worgl"', (t) => {
 });
 
 // Language specifics
-test("Should match names in different languages in same script (latin)", (t) => {
+test("Should match names in different languages in same script (latin)", async (t) => {
   t.like(parse("station Kufstein", ["nl"]), { normalized: "station Kufstein" });
   t.like(parse("gare de Kufstein", ["fr"]), { normalized: "gare de Kufstein" });
   t.like(
@@ -386,7 +386,7 @@ test("Should match names in different languages in same script (latin)", (t) => 
   );
 });
 
-test("Should not match names in different languages in different script", (t) => {
+test("Should not match names in different languages in different script", async (t) => {
   t.like(parse("デュッセルドルフ空港", ["nl"]), {
     normalized: "デュッセルドルフ空港",
   });
