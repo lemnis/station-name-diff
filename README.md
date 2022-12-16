@@ -1,4 +1,4 @@
-# station-normalize
+# station-name-diff
 
 As correctly said in [this article](https://bflorat.medium.com/proper-strings-normalization-for-comparison-purpose-226773865322)
 
@@ -12,7 +12,7 @@ Stations can sometimes can be located very close to each other with a similar na
 
 As we should be able have a educated guess if 2 locations are the same, as such we should detect that
 
-[Einhoven Centraal](https://goo.gl/maps/x3LaVxQ2DqoKR1t58) and [Eindhoven Strijp-S](https://goo.gl/maps/VsvqgiNQDfYzidac8) are not the same, but that [Einhoven Centraal](https://goo.gl/maps/x3LaVxQ2DqoKR1t58) and [Einhoven](https://goo.gl/maps/mVpv7ZimaXqkczsq6) are the same.
+[Eindhoven Centraal](https://goo.gl/maps/x3LaVxQ2DqoKR1t58) and [Eindhoven Strijp-S](https://goo.gl/maps/VsvqgiNQDfYzidac8) are not the same, but that [Eidnhoven Centraal](https://goo.gl/maps/x3LaVxQ2DqoKR1t58) and [Eindhoven](https://goo.gl/maps/mVpv7ZimaXqkczsq6) are the same.
 
 ## Features
 
