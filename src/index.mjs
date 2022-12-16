@@ -9,6 +9,7 @@ import {
 } from "./script.mjs";
 import wuzzy from "wuzzy";
 import { normalize } from "./normalize.mjs";
+import { getAlias } from "./alias.mjs";
 
 const Type = {
   STATION: "station",
@@ -122,7 +123,9 @@ export const compare = (a, b, { ignoreBrackets = false } = {}) => {
     const newASplit = [aSplit[aSplit.length - 1], ...aSplit.slice(0, -1)];
 
     const [long, short] =
-      newASplit.length > bSplit.length ? [newASplit, bSplit] : [bSplit, newASplit];
+      newASplit.length > bSplit.length
+        ? [newASplit, bSplit]
+        : [bSplit, newASplit];
 
     const firstMismatchIndex = long.findIndex((a, i) => a !== short[i]);
 
@@ -130,15 +133,18 @@ export const compare = (a, b, { ignoreBrackets = false } = {}) => {
     const bJoined = bSplit.slice(firstMismatchIndex).join(" ");
 
     const newDistance = wuzzy.ngram(aJoined, bJoined);
-    if(newDistance > distance) score =
-    firstMismatchIndex < 0 ? 1 : distance > MINIMUM_DISTANCE ? distance : 0;
+    if (newDistance > distance)
+      score =
+        firstMismatchIndex < 0 ? 1 : distance > MINIMUM_DISTANCE ? distance : 0;
   }
 
   if (score < 1 && bSimplified?.match(/\(/)) {
     const newBSplit = [bSplit[bSplit.length - 1], ...bSplit.slice(0, -1)];
 
     const [long, short] =
-      aSplit.length > newBSplit.length ? [aSplit, newBSplit] : [newBSplit, aSplit];
+      aSplit.length > newBSplit.length
+        ? [aSplit, newBSplit]
+        : [newBSplit, aSplit];
 
     const firstMismatchIndex = long.findIndex((a, i) => a !== short[i]);
 
@@ -146,11 +152,24 @@ export const compare = (a, b, { ignoreBrackets = false } = {}) => {
     const bJoined = newBSplit.slice(firstMismatchIndex).join(" ");
 
     const newDistance = wuzzy.ngram(aJoined, bJoined);
-    if(newDistance > distance) score =
-    firstMismatchIndex < 0 ? 1 : distance > MINIMUM_DISTANCE ? distance : 0;
+    if (newDistance > distance)
+      score =
+        firstMismatchIndex < 0 ? 1 : distance > MINIMUM_DISTANCE ? distance : 0;
   }
 
   return { score };
+};
+
+/**
+ * @param {{ name: string, lang: string }} a
+ * @param {{ name: string, lang: string }} b
+ * @param {{ ignoreBrackets?: boolean } | undefined} [options]
+ */
+export const compareWithAlias = async (a, b, options) => {
+  const aliases = await getAlias(a.name);
+  return aliases
+    .map((alias) => compare(alias, b))
+    .sort((a, b) => b.score - a.score)?.[0];
 };
 
 export { normalize };

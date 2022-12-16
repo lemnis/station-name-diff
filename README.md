@@ -32,20 +32,25 @@ As we should be able have a educated guess if 2 locations are the same, as such 
 
 ## Comparisons
 
-- City name should match city name with appending central station, `Eindhoven` == `Eindhoven Centraal`
+Use `compare({ name: ... }, { name: ... })`
+
+- City name should match city name when appended with central station, `Eindhoven` == `Eindhoven Centraal`
 - Should recoginize abbrevations, `St. Pölten` == `Sankt Pölten`
 - Should recognize diacritics, `Woergl` == `Wörgl` and `Worgl` == `Wörgl`
 - Ignore dash (when possible?),`'s-Hertogenbosch` == `'s Hertogenbosch`
 - Compare different seperators, `Bascharage-Sanem` == `Bascharage/Sanem`
-- ?? It should ignore region names, `Athens (Greece)` == `Athens`
+- Ignores country names, `Athens (Greece)` == `Athens`
+
+### Comparing with aliases
+
+Use `compareWithAlias({ name: ... }, { name: ... })`
+
+To compare a aliases wikidata's database is used, rate limits may apply.
+
+- This is useful for comparing [exonyms](https://en.wikipedia.org/wiki/Endonym_and_exonym),`Köln` != `Cologne`
+- Or for aliases,`Den Bosch` != `'s-Hertogenbosch`
+
 
 ## Comparisons that should fail
 
 - Substation should not at match city name, `Eindhoven` != `Eindhoven Strijp-S`
-- It doesn't support [exonyms](https://en.wikipedia.org/wiki/Endonym_and_exonym),`Köln` != `Cologne`
-- It doesn't recognize aliases,` Den Bosch` != `'s-Hertogenbosch`
-
-## Typical native format per language
-
-- Luxembourg - `City Name (Optionally extra text), Gare`
-- Netherlands - `City Name Optionaly extra text`

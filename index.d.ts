@@ -10,3 +10,9 @@ export function compare(
   b: { name: string; lang?: string },
   options?: { ignoreBrackets?: boolean}
 ): { score: number; reason?: string };
+
+export function compareWithAlias(
+  a: { name: string; lang?: string },
+  b: { name: string; lang?: string },
+  options?: { ignoreBrackets?: boolean}
+): { score: number; reason?: string };
