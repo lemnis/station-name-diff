@@ -45,6 +45,11 @@ export const Languages = {
       },
     ],
   },
+  pt: {
+    station: ["Estádio do "],
+    centralStation: [],
+    halt: ["Apeadeiro de "],
+  },
   es: {
     station: ["Estación de ", "Estacion de "],
     centralStation: [],
@@ -114,5 +119,15 @@ export const Languages = {
     station: ["Station"],
     centralStation: ["centralstation", "central"],
     halt: [],
+  },
+  hu: {
+    station: ["vasutallomas"],
+    centralStation: [],
+    halt: [],
+  },
+  ro: {
+    station: ["gara "],
+    centralStation: [],
+    halt: ["halta "],
   },
 };

@@ -9,7 +9,6 @@ import {
 } from "./script.mjs";
 import wuzzy from "wuzzy";
 import { normalize } from "./normalize.mjs";
-import { getAlias } from "./alias.mjs";
 
 const Type = {
   STATION: "station",
@@ -158,18 +157,6 @@ export const compare = (a, b, { ignoreBrackets = false } = {}) => {
   }
 
   return { score };
-};
-
-/**
- * @param {{ name: string, lang: string }} a
- * @param {{ name: string, lang: string }} b
- * @param {{ ignoreBrackets?: boolean } | undefined} [options]
- */
-export const compareWithAlias = async (a, b, options) => {
-  const aliases = await getAlias(a.name);
-  return aliases
-    .map((alias) => compare(alias, b))
-    .sort((a, b) => b.score - a.score)?.[0];
 };
 
 export { normalize };

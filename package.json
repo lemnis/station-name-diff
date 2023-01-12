@@ -1,10 +1,11 @@
 {
   "name": "station-name-diff",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "build/cjs.js",
   "scripts": {
-    "test": "ava tests/*.mjs"
+    "test": "ava tests/*.mjs",
+    "build": "rollup src/index.mjs --format cjs --file build/cjs.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "wuzzy": "^0.1.8"
   },
   "devDependencies": {
-    "ava": "^4.2.0"
+    "ava": "^4.2.0",
+    "rollup": "^3.10.0"
   }
 }

@@ -1,5 +1,5 @@
 import test from "ava";
-import { compare, parse } from "./index.js";
+import { compare, parse } from "./index.mjs";
 
 test(`Should match "Berlaimont (Aulnoye)" with "Berlaimont(Aulnoye)"`, (t) => {
   t.like(parse("Berlaimont (Aulnoye)", ["en"]), { normalized: "Berlaimont (Aulnoye)" });
